@@ -1,8 +1,10 @@
-# Draper Shortcuts
+# Decorator Dryer
 
-Welcome to Draper Shortcuts! The aim of this gem is to help you write smaller, easier to maintain, decorators.
+Welcome to Decorator Dryer! The aim of this gem is to help you write smaller, DRYer, easier to maintain, decorators.
 
-Draper Shortcuts contains a collection of formatters that cover some of the more common things that developers do in their Draper decorators. On top of those formatters is a layer of declarative shortcuts to help you reduce the amount of code in your decorator classes.
+Decorator Dryer contains a collection of formatters that cover some of the more common things that developers do in their decorators. On top of those formatters is a layer of shortcuts to help you reduce the amount of code in your decorator classes.
+
+This is not a fully-formed decorator framework. Decorator Dryer is intended as a companion for Draper.
 
 ## Installation
 
@@ -10,7 +12,7 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'draper'
-gem 'draper_shortcuts'
+gem 'decorator_dryer'
 ```
 
 And then execute:
@@ -21,12 +23,12 @@ And then execute:
 
 ### Formatters
 
-The formatters in Draper Shortcuts use a set of default formats for things like dates and times.
+The formatters in Decorator Dryer use a set of default formats for things like dates and times.
 
 If you are happy with the defaults, you can skip this section. However, if you would like to set your own defaults, you can do so with an initializer.
 
 ```ruby
-DraperShortcuts.configure do |config|
+DecoratorDryer.configure do |config|
   config.date_format = "%Y-%m-%d"
   config.humanized_date_format = "%d/%m/%Y"
   config.datetime_format = "%Y-%m-%d %H:%M"
@@ -37,12 +39,12 @@ end
 
 ### Attachments
 
-Draper Shortcuts also provides declarative shortcuts for attachments. There will be more detail on these shortcuts in later sections.
+Decorator Dryer also provides shortcuts for attachments. There will be more detail on these shortcuts in later sections.
 
 This can also be configured via an initializer.
 
 ```ruby
-DraperShortcuts.configure do |config|
+DecoratorDryer.configure do |config|
   config.attachment_shortcuts.mode = :none
   config.attachment_shortcuts.default_preview_transform = :none
 end
@@ -59,15 +61,15 @@ Or, a representation with something like:
 
 ## Usage
 
-Draper Shortcuts is not a complete decorator library. It is intended for use alongside Draper. Why reinvent the wheel when there is already such a good option out there?
+Decorator Dryer is not a complete decorator library. It is intended for use alongside Draper. Why reinvent the wheel when there is already such a good option out there?
 
-You can use Draper Shortcuts by either adding the shortcuts to your decorator classes or by directly calling the formatters from within your decorator methods.
+You can use Decorator Dryer by either adding the shortcuts to your decorator classes or by directly calling the formatters from within your decorator methods.
 
 ### Shortcuts
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   to_date_format :date_of_birth
   to_datetime_format :moment_of_birth
@@ -83,7 +85,7 @@ This shortcut adds a method to your decorator that returns the formatted date. I
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   to_date_format :date_of_birth, :date_of_graduation
 end
@@ -111,7 +113,7 @@ This shortcut adds a method to your decorator that returns the formatted datetim
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   to_datetime_format :moment_of_birth, :moment_of_graduation
 end
@@ -139,7 +141,7 @@ This shortcut adds a method to your decorator that returns the formatted time. I
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   to_time_format :moment_of_birth, :moment_of_graduation
 end
@@ -159,7 +161,7 @@ This shortcut adds a method to your decorator that returns the provided numbers 
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   to_precision_number :salary, :coffee_budget, precision: 2
   to_precision_number :height_in_meters, precision: 3
@@ -181,7 +183,7 @@ The preview is based on the gem's default preview-transform, or the transform se
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   to_attachment :profile_picture, :resume
   to_attachment :birth_certificate, preview_transform: :thumbnail
@@ -197,11 +199,11 @@ person.decorate.profile_picture_signed_id
 
 ### Formatters
 
-It is also possible to use the formatters directly, without the declarative shortcuts. This gives you the flexibility to set different method names or use additional logic.
+It is also possible to use the formatters directly, without the shortcuts. This gives you the flexibility to set different method names or use additional logic.
 
 ```ruby
 class PersonDecorator < Draper::Decorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   def first_birthday
     format_date(object.date_of_birth)
@@ -235,7 +237,7 @@ To release a new version of this gem, update the version number in `version.rb`,
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/CodeTectonics/draper_shortcuts. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/CodeTectonics/draper_shortcuts/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/CodeTectonics/decorator_dryer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/CodeTectonics/decorator_dryer/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -243,4 +245,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the DraperShortcuts project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/CodeTectonics/draper_shortcuts/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the DecoratorDryer project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/CodeTectonics/decorator_dryer/blob/master/CODE_OF_CONDUCT.md).

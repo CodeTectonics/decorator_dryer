@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "draper_shortcuts"
+require "decorator_dryer"
 require "dummy/dummy_model"
 require "dummy/dummy_model_decorator"
 
-RSpec.describe DraperShortcuts do
+RSpec.describe DecoratorDryer do
   describe "::Formatters" do
     it "returns formatted dates" do
       decorator = DummyModelDecorator.new({})

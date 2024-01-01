@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DummyModelDecorator
-  include DraperShortcuts
+  include DecoratorDryer
 
   attr_accessor :object, :context
 

@@ -1,28 +1,28 @@
 # frozen_string_literal: true
 
-module DraperShortcuts
+module DecoratorDryer
   module Formatters
     include ActionView::Helpers::NumberHelper
 
     def format_date(date)
       if context[:humanize]
-        date_format = DraperShortcuts.configuration.humanized_date_format
+        date_format = DecoratorDryer.configuration.humanized_date_format
       else
-        date_format = DraperShortcuts.configuration.date_format
+        date_format = DecoratorDryer.configuration.date_format
       end
       date.try(:strftime, date_format)
     end
 
     def format_time(time)
-      time_format = DraperShortcuts.configuration.time_format
+      time_format = DecoratorDryer.configuration.time_format
       time.try(:strftime, time_format)
     end
 
     def format_datetime(datetime)
       if context[:humanize]
-        datetime_format = DraperShortcuts.configuration.humanized_datetime_format
+        datetime_format = DecoratorDryer.configuration.humanized_datetime_format
       else
-        datetime_format = DraperShortcuts.configuration.datetime_format
+        datetime_format = DecoratorDryer.configuration.datetime_format
       end
       datetime.try(:strftime, datetime_format)
     end

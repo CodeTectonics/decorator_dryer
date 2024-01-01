@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "lib/draper_shortcuts/version"
+require_relative "lib/decorator_dryer/version"
 
 Gem::Specification.new do |s|
-  s.name = "draper_shortcuts"
-  s.version = DraperShortcuts::VERSION
+  s.name = "decorator_dryer"
+  s.version = DecoratorDryer::VERSION
   s.authors = ["Mark Harbison"]
   s.email = ["mark@tyne-solutions.com"]
 
   s.summary = "Shortcuts for concise view models."
   s.description = "Shortcuts for concise view models."
-  s.homepage = "https://github.com/CodeTectonics/draper_shortcuts"
+  s.homepage = "https://github.com/CodeTectonics/decorator_dryer"
   s.license = "MIT"
   s.required_ruby_version = ">= 2.6.0"
 

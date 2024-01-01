@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DraperShortcuts
+module DecoratorDryer
   class Configuration
     attr_accessor :date_format, :humanized_date_format,
                   :datetime_format, :humanized_datetime_format, :time_format,

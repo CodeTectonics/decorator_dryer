@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DraperShortcuts
+module DecoratorDryer
   module ActiveStorageShortcuts
     def self.included(klass)
       klass.extend(ClassMethods)
@@ -40,7 +40,7 @@ module DraperShortcuts
       end
 
       def to_attachment_preview(*attrs, transform: nil)
-        transform ||= DraperShortcuts.configuration.attachment_shortcuts.default_preview_transform
+        transform ||= DecoratorDryer.configuration.attachment_shortcuts.default_preview_transform
 
         attrs.each do |attr|
           method_name = "#{attr}_preview".to_sym

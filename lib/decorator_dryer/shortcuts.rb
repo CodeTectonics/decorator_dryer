@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module DraperShortcuts
+module DecoratorDryer
   module Shortcuts
-    include DraperShortcuts::Formatters
+    include DecoratorDryer::Formatters
 
     def self.included(klass)
       klass.extend(ClassMethods)
