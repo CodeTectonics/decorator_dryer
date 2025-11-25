@@ -22,7 +22,13 @@ module DecoratorDryer
           define_method(method_name) do
             attachment = object.send(attr)
 
-            url_for(attachment) if attachment.attached?
+            if attachment.attached?
+              if attachment.content_type == "image/heic"
+                url_for(attachment.variant(format: :jpg).processed)
+              else
+                url_for(attachment)
+              end
+            end
           end
         end
       end
