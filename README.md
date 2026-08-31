@@ -223,12 +223,79 @@ class PersonDecorator < Draper::Decorator
 end
 ```
 
+## Testing
+
+### RSpec Matchers
+
+Decorator Dryer provides RSpec matchers to help you test your decorators. To use them, require the matchers in your `spec_helper.rb` or `rails_helper.rb`:
+
+```ruby
+require 'decorator_dryer/rspec'
+```
+
+The following matchers are available:
+
+#### format_field_to_name
+
+Verifies that a decorator defines a method to retrieve the name value from an association:
+
+```ruby
+it { should format_field_to_name(:person) }
+```
+
+#### format_field_to_datetime
+
+Verifies that a decorator defines a datetime format method for a given attribute:
+
+```ruby
+it { should format_field_to_datetime(:moment_of_birth) }
+```
+
+#### format_field_to_time
+
+Verifies that a decorator defines a time format method for a given attribute:
+
+```ruby
+it { should format_field_to_time(:lunch_time) }
+```
+
+#### format_field_to_date
+
+Verifies that a decorator defines a date format method for a given attribute:
+
+```ruby
+it { should format_field_to_date(:moment_of_birth) }
+```
+
+#### format_field_to_precision_number
+
+Verifies that a decorator defines a precision number format method for a given attribute:
+
+```ruby
+it { should format_field_to_precision_number(:salary, 2) }
+```
+
+#### delegate_field
+
+Verifies that a decorator defines a method to delegate a given attribute to a given association:
+
+```ruby
+it { should delegate_field(:job_title, :employee) }
+```
+
+#### delegate_field_with_prefix
+
+Verifies that a decorator defines a method to delegate a given attribute to a given association, using the association as the method prefix:
+
+```ruby
+it { should delegate_field_with_prefix(:job_title, :employee) }
+```
+
 ## To Do
 
 * Enable formats to be overridden when calling shortcuts.
 * Add support for additional attachment libraries.
 * Add a more flexible replacement for the `to_name` shortcut.
-* Add test helpers.
 * Add a generator for the initialiser.
 
 ## Development
