@@ -256,7 +256,7 @@ it { should format_field_to_datetime(:moment_of_birth) }
 Verifies that a decorator defines a time format method for a given attribute:
 
 ```ruby
-it { should format_field_to_datetime(:lunch_time) }
+it { should format_field_to_time(:lunch_time) }
 ```
 
 #### format_field_to_date

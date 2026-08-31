@@ -47,6 +47,9 @@ module DecoratorDryer
           subject.decorate.send("#{association}_#{field}") ==
             subject.send(association).decorate.send(field)
         end
+        description do
+          "delegate #{field} to #{association} with prefix"
+        end
         failure_message do |subject|
           "expected #{subject.class.name} to delegate #{field} to #{association}"
         end
