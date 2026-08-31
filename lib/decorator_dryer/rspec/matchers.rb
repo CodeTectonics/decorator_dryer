@@ -8,7 +8,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(user).to format_field_to_name(:role)
-      RSpec::Matchers.define :format_field_to_name do |field|
+      ::RSpec::Matchers.define :format_field_to_name do |field|
         match do |subject|
           subject.decorate.send("#{field}_name") == subject.send(field).try(:name)
         end
@@ -24,7 +24,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(post).to format_field_to_datetime(:published_at)
-      RSpec::Matchers.define :format_field_to_datetime do |field|
+      ::RSpec::Matchers.define :format_field_to_datetime do |field|
         match do |subject|
           subject.decorate.send(field) == subject.send(field).try(:strftime, '%Y-%m-%d %H:%M')
         end
@@ -40,7 +40,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(event).to format_field_to_date(:start_date)
-      RSpec::Matchers.define :format_field_to_date do |field|
+      ::RSpec::Matchers.define :format_field_to_date do |field|
         match do |subject|
           subject.decorate.send(field) == subject.send(field).try(:strftime, '%Y-%m-%d')
         end
@@ -56,7 +56,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(schedule).to format_field_to_time(:start_time)
-      RSpec::Matchers.define :format_field_to_time do |field|
+      ::RSpec::Matchers.define :format_field_to_time do |field|
         match do |subject|
           subject.decorate.send(field) == subject.send(field).try(:strftime, '%H:%M')
         end
@@ -72,7 +72,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(product).to format_field_to_precision_number(:price, 2)
-      RSpec::Matchers.define :format_field_to_precision_number do |field, precision|
+      ::RSpec::Matchers.define :format_field_to_precision_number do |field, precision|
         match do |subject|
           subject.decorate.send(field) == number_with_precision(subject.send(field), precision: precision)
         end
@@ -88,7 +88,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(order).to delegate_field(:email, :customer)
-      RSpec::Matchers.define :delegate_field do |field, association|
+      ::RSpec::Matchers.define :delegate_field do |field, association|
         match do |subject|
           subject.decorate.send(field) == subject.send(association).decorate.send(field)
         end
@@ -105,7 +105,7 @@ module DecoratorDryer
       #
       # @example
       #   expect(order).to delegate_field_with_prefix(:email, :customer)
-      RSpec::Matchers.define :delegate_field_with_prefix do |field, association|
+      ::RSpec::Matchers.define :delegate_field_with_prefix do |field, association|
         match do |subject|
           subject.decorate.send("#{association}_#{field}") ==
             subject.send(association).decorate.send(field)
