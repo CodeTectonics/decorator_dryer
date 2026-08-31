@@ -3,72 +3,52 @@
 module DecoratorDryer
   module RSpec
     module Matchers
-      # Matcher to verify that a decorator defines a date format method for a given attribute
-      #
-      # Example:
-      #   expect(PersonDecorator).to define_date_format_for(:date_of_birth)
-      #
-      ::RSpec::Matchers.define :define_date_format_for do |attribute|
-        match do |decorator_class|
-          decorator_class.instance_methods.include?(attribute)
-        end
-
-        failure_message do |decorator_class|
-          "expected #{decorator_class} to define date format method for :#{attribute}"
-        end
-
-        failure_message_when_negated do |decorator_class|
-          "expected #{decorator_class} not to define date format method for :#{attribute}"
-        end
-
-        description do
-          "define date format method for :#{attribute}"
+      RSpec::Matchers.define :format_field_to_name do |field|
+        match do |subject|
+          subject.decorate.send("#{field}_name") == subject.send(field).try(:name)
         end
       end
 
-      # Matcher to verify that a decorator defines a datetime format method for a given attribute
-      #
-      # Example:
-      #   expect(PersonDecorator).to define_datetime_format_for(:moment_of_birth)
-      #
-      ::RSpec::Matchers.define :define_datetime_format_for do |attribute|
-        match do |decorator_class|
-          decorator_class.instance_methods.include?(attribute)
-        end
-
-        failure_message do |decorator_class|
-          "expected #{decorator_class} to define datetime format method for :#{attribute}"
-        end
-
-        failure_message_when_negated do |decorator_class|
-          "expected #{decorator_class} not to define datetime format method for :#{attribute}"
-        end
-
-        description do
-          "define datetime format method for :#{attribute}"
+      RSpec::Matchers.define :format_field_to_datetime do |field|
+        match do |subject|
+          subject.decorate.send(field) == subject.send(field).try(:strftime, '%Y-%m-%d %H:%M')
         end
       end
 
-      # Matcher to verify that a decorator defines a time format method for a given attribute
-      #
-      # Example:
-      #   expect(PersonDecorator).to define_time_format_for(:lunch_time)
-      #
-      ::RSpec::Matchers.define :define_time_format_for do |attribute|
-        match do |decorator_class|
-          decorator_class.instance_methods.include?(attribute)
+      RSpec::Matchers.define :format_field_to_date do |field|
+        match do |subject|
+          subject.decorate.send(field) == subject.send(field).try(:strftime, '%Y-%m-%d')
         end
+      end
 
-        failure_message do |decorator_class|
-          "expected #{decorator_class} to define time format method for :#{attribute}"
+      RSpec::Matchers.define :format_field_to_time do |field|
+        match do |subject|
+          subject.decorate.send(field) == subject.send(field).try(:strftime, '%H:%M')
         end
+      end
 
-        failure_message_when_negated do |decorator_class|
-          "expected #{decorator_class} not to define time format method for :#{attribute}"
+      RSpec::Matchers.define :format_field_to_precision_number do |field, precision|
+        match do |subject|
+          subject.decorate.send(field) == number_with_precision(subject.send(field), precision: precision)
         end
+      end
 
-        description do
-          "define time format method for :#{attribute}"
+      RSpec::Matchers.define :delegate_field do |field, association|
+        match do |subject|
+          subject.decorate.send(field) == subject.send(association).decorate.send(field)
+        end
+        failure_message do |subject|
+          "expected #{subject.class.name} to delegate #{field} to #{association}"
+        end
+      end
+
+      RSpec::Matchers.define :delegate_field_with_prefix do |field, association|
+        match do |subject|
+          subject.decorate.send("#{association}_#{field}") ==
+            subject.send(association).decorate.send(field)
+        end
+        failure_message do |subject|
+          "expected #{subject.class.name} to delegate #{field} to #{association}"
         end
       end
     end

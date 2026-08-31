@@ -223,7 +223,6 @@ class PersonDecorator < Draper::Decorator
 end
 ```
 
-## To Do
 ## Testing
 
 ### RSpec Matchers
@@ -236,35 +235,68 @@ require 'decorator_dryer/rspec'
 
 The following matchers are available:
 
-#### define_date_format_for
+#### format_field_to_name
 
-Verifies that a decorator defines a date format method for a given attribute:
+Verifies that a decorator defines a method to retrieve the name value from an association:
 
 ```ruby
-expect(PersonDecorator).to define_date_format_for(:date_of_birth)
+it { should format_field_to_name(:person) }
 ```
 
-#### define_datetime_format_for
+#### format_field_to_datetime
 
 Verifies that a decorator defines a datetime format method for a given attribute:
 
 ```ruby
-expect(PersonDecorator).to define_datetime_format_for(:moment_of_birth)
+it { should format_field_to_datetime(:moment_of_birth) }
 ```
 
-#### define_time_format_for
+#### format_field_to_time
 
 Verifies that a decorator defines a time format method for a given attribute:
 
 ```ruby
-expect(PersonDecorator).to define_time_format_for(:lunch_time)
+it { should format_field_to_datetime(:lunch_time) }
 ```
 
+#### format_field_to_date
+
+Verifies that a decorator defines a date format method for a given attribute:
+
+```ruby
+it { should format_field_to_date(:moment_of_birth) }
+```
+
+#### format_field_to_precision_number
+
+Verifies that a decorator defines a precision number format method for a given attribute:
+
+```ruby
+it { should format_field_to_precision_number(:salary, 2) }
+```
+
+#### delegate_field
+
+Verifies that a decorator defines a method to delegate a given attribute to a given association:
+
+```ruby
+it { should delegate_field(:job_title, :employee) }
+```
+
+#### delegate_field_with_prefix
+
+Verifies that a decorator defines a method to delegate a given attribute to a given association, using the association as the method prefix:
+
+```ruby
+it { should delegate_field_with_prefix(:job_title, :employee) }
+```
+
+## To Do
 
 * Enable formats to be overridden when calling shortcuts.
 * Add support for additional attachment libraries.
 * Add a more flexible replacement for the `to_name` shortcut.
-* Add test helpers.
+* Add a generator for the initialiser.
 
 ## Development
 
